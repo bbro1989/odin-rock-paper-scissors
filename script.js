@@ -23,7 +23,12 @@ function playRound(humanChoice) {
     ) {
         humanScore++;
         resultMessage = `You win! ${humanChoice} beats ${computerChoice}.`;
-    } else {
+    } else if (humanChoice === "reset" ){
+        humanScore = 0;
+        computerScore = 0;
+        resultMessage = 'Lets restart';
+        enableButtons();
+    }else {
         computerScore++;
         resultMessage = `You lose! ${computerChoice} beats ${humanChoice}.`;
     }
@@ -36,6 +41,7 @@ function playRound(humanChoice) {
         resultDiv.textContent += ` ${finalMessage}`;
         disableButtons();
     }
+    
 }
 
 function disableButtons() {
@@ -43,7 +49,13 @@ function disableButtons() {
     document.getElementById('paper').disabled = true;
     document.getElementById('scissors').disabled = true;
 }
+function enableButtons() {
+    document.getElementById('rock').disabled = false;
+    document.getElementById('paper').disabled = false;
+    document.getElementById('scissors').disabled = false;
+}
 
 document.getElementById('rock').addEventListener('click', () => playRound('rock'));
 document.getElementById('paper').addEventListener('click', () => playRound('paper'));
 document.getElementById('scissors').addEventListener('click', () => playRound('scissors'));
+document.getElementById('reset').addEventListener('click', () => playRound('reset'));
